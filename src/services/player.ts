@@ -69,17 +69,17 @@ export default class {
     this.status = STATUS.PAUSED;
 
     if (this.voiceConnection === null) {
-      throw new Error('📻 Não conectado a um canal de voz.');
+      throw new Error('Not connected to a voice channel.');
     }
 
     const currentSong = this.getCurrent();
 
     if (!currentSong) {
-      throw new Error('📻 Nenhuma música tocando no momento');
+      throw new Error('No song currently playing');
     }
 
     if (positionSeconds > currentSong.length) {
-      throw new Error('📻 A posição de busca está fora da faixa da música.');
+      throw new Error('Seek position is outside the range of the song.');
     }
 
     const stream = await this.getStream(currentSong.url, {seek: positionSeconds});
@@ -101,13 +101,13 @@ export default class {
 
   async play(): Promise<void> {
     if (this.voiceConnection === null) {
-      throw new Error('📻 Não conectado a um canal de voz.');
+      throw new Error('Not connected to a voice channel.');
     }
 
     const currentSong = this.getCurrent();
 
     if (!currentSong) {
-      throw new Error('📻 Fila vazia.');
+      throw new Error('Queue empty.');
     }
 
     // Resume from paused state
@@ -149,7 +149,7 @@ export default class {
 
   pause(): void {
     if (this.status !== STATUS.PLAYING) {
-      throw new Error('📻 Atualmente não está tocando nada.');
+      throw new Error('Not currently playing.');
     }
 
     this.status = STATUS.PAUSED;
@@ -183,7 +183,7 @@ export default class {
       this.positionInSeconds = 0;
       this.stopTrackingPosition();
     } else {
-      throw new Error('📻 Nenhuma música na fila para encaminhar.');
+      throw new Error('No songs in queue to forward to.');
     }
   }
 
@@ -197,7 +197,7 @@ export default class {
         await this.play();
       }
     } else {
-      throw new Error('📻 Nenhuma música na fila para voltar.');
+      throw new Error('No songs in queue to go back to.');
     }
   }
 
@@ -336,7 +336,7 @@ export default class {
 
         if (!format) {
           // If still no format is found, throw
-          throw new Error('📻 Não consigo encontrar o formato adequado.');
+          throw new Error('Can\'t find suitable format.');
         }
       }
 
