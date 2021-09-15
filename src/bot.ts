@@ -28,7 +28,7 @@ export default class {
   }
 
   public async listen(): Promise<string> {
-    // Load in commands
+    // Load in commands as
     container.getAll<Command>(TYPES.Command).forEach(command => {
       const commandNames = [command.name, ...command.aliases];
 
