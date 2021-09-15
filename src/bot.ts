@@ -84,7 +84,7 @@ export default class {
 
       try {
         if (handler.requiresVC && !isUserInVoice(msg.guild, msg.author)) {
-          await msg.channel.send(errorMsg('gotta be in a voice channel'));
+          await msg.channel.send(errorMsg('📻 Você tem que estar em um canal de voz para ativar o Radinho'));
           return;
         }
 
