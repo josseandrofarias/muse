@@ -5,6 +5,7 @@ import container from './inversify.config';
 import {TYPES} from './types';
 import Bot from './bot';
 import {sequelize} from './utils/db';
+import {start} from './utils/api';
 
 let bot = container.get<Bot>(TYPES.Bot);
 const spotify = container.get<Spotify>(TYPES.Lib.Spotify);
@@ -30,4 +31,5 @@ const refreshSpotifyToken = async () => {
   await sequelize.sync({});
 
   await bot.listen();
+  start();
 })();
