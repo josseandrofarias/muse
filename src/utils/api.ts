@@ -2,7 +2,7 @@ import {createServer, IncomingMessage, ServerResponse} from 'http';
 
 export const start = () => {
   const server = createServer((_request: IncomingMessage, response: ServerResponse) => {
-    response.end('Hello world!');
+    response.end({status: true, online: true, message: 'Radinho 2.0 is running!'});
   });
 
   const port = process.env.PORT ?? 5000;
