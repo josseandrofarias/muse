@@ -9,8 +9,8 @@ export default class implements Command {
   public name = 'config';
   public aliases = [];
   public examples = [
-    ['config prefix !', 'set the prefix to !'],
-    ['config channel music-commands', 'bind the bot to the music-commands channel']
+    ['config prefix !', 'Pefina o prefixo!'],
+    ['config channel music-commands', 'Ligar o bot ao canal específico para ficar escutando os comandos']
   ];
 
   public async execute(msg: Message, args: string []): Promise<void> {
@@ -19,8 +19,8 @@ export default class implements Command {
       const settings = await Settings.findByPk(msg.guild!.id);
 
       if (settings) {
-        let response = `prefix: \`${settings.prefix}\`\n`;
-        response += `channel: ${msg.guild!.channels.cache.get(settings.channel)!.toString()}`;
+        let response = `prefixo: \`${settings.prefix}\`\n`;
+        response += `📻 Canal: ${msg.guild!.channels.cache.get(settings.channel)!.toString()}`;
 
         await msg.channel.send(response);
       }
@@ -31,12 +31,12 @@ export default class implements Command {
     const setting = args[0];
 
     if (args.length !== 2) {
-      await msg.channel.send(errorMsg('incorrect number of arguments'));
+      await msg.channel.send(errorMsg('📻 Número incorreto de argumentos'));
       return;
     }
 
     if (msg.author.id !== msg.guild!.owner!.id) {
-      await msg.channel.send(errorMsg('not authorized'));
+      await msg.channel.send(errorMsg('📻 Não autorizado'));
       return;
     }
 
@@ -46,7 +46,7 @@ export default class implements Command {
 
         await Settings.update({prefix: newPrefix}, {where: {guildId: msg.guild!.id}});
 
-        await msg.channel.send(`👍 prefix updated to \`${newPrefix}\``);
+        await msg.channel.send(`📻 👍 Prefixo atualizado para \`${newPrefix}\``);
         break;
       }
 
@@ -63,18 +63,18 @@ export default class implements Command {
           await Settings.update({channel: channel.id}, {where: {guildId: msg.guild!.id}});
 
           await Promise.all([
-            (channel as TextChannel).send('hey apparently I\'m bound to this channel now'),
+            (channel as TextChannel).send('📻 Hey, aparentemente estou vinculado a este canal agora'),
             msg.react('👍')
           ]);
         } else {
-          await msg.channel.send(errorMsg('either that channel doesn\'t exist or you want me to become sentient and listen to a voice channel'));
+          await msg.channel.send(errorMsg('📻 Ou esse canal não existe ou você quer que eu me torne consciente e ouça um canal de voz'));
         }
 
         break;
       }
 
       default:
-        await msg.channel.send(errorMsg('I\'ve never met this setting in my life'));
+        await msg.channel.send(errorMsg('📻 Nunca conheci esse cenário na minha vida'));
     }
   }
 }

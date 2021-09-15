@@ -10,7 +10,7 @@ export default class implements Command {
   public name = 'disconnect';
   public aliases = ['dc'];
   public examples = [
-    ['disconnect', 'pauses and disconnects player']
+    ['disconnect', 'Pausa e desconecta o reprodutor']
   ];
 
   public requiresVC = true;
@@ -25,12 +25,12 @@ export default class implements Command {
     const player = this.playerManager.get(msg.guild!.id);
 
     if (!player.voiceConnection) {
-      await msg.channel.send(errorMsg('not connected'));
+      await msg.channel.send(errorMsg('📻 Não conectado'));
       return;
     }
 
     player.disconnect();
 
-    await msg.channel.send('u betcha');
+    await msg.channel.send('📻 Pode apostar');
   }
 }

@@ -11,7 +11,7 @@ export default class implements Command {
   public name = 'fseek';
   public aliases = [];
   public examples = [
-    ['fseek 10', 'skips forward in current song by 10 seconds']
+    ['fseek 10', 'Avança na música atual em 10 segundos']
   ];
 
   public requiresVC = true;
@@ -28,19 +28,19 @@ export default class implements Command {
     const currentSong = player.getCurrent();
 
     if (!currentSong) {
-      await msg.channel.send(errorMsg('nothing is playing'));
+      await msg.channel.send(errorMsg('📻 Não está tocando nada'));
       return;
     }
 
     if (currentSong.isLive) {
-      await msg.channel.send(errorMsg('can\'t seek in a livestream'));
+      await msg.channel.send(errorMsg('📻 Não é possível avançar em uma transmissão ao vivo'));
       return;
     }
 
     const seekTime = parseInt(args[0], 10);
 
     if (seekTime + player.getPosition() > currentSong.length) {
-      await msg.channel.send(errorMsg('can\'t seek past the end of the song'));
+      await msg.channel.send(errorMsg('📻 Não posso avançar além do final da música'));
       return;
     }
 

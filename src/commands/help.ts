@@ -10,7 +10,7 @@ export default class implements Command {
   public name = 'help';
   public aliases = ['h'];
   public examples = [
-    ['help', 'you don\'t need a description']
+    ['help', 'Lista comandos de ajuda']
   ];
 
   private commands: Command[] = [];
@@ -55,7 +55,7 @@ export default class implements Command {
       return content;
     }, '');
 
-    await msg.author.send(res, {split: true});
+    await msg.author.send(`📻 Segue a lista de atalhos para você ficar por dentro de tudo \n${res}`, {split: true});
     await msg.react('🇩');
     await msg.react('🇲');
   }

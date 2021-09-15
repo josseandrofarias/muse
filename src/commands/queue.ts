@@ -16,8 +16,8 @@ export default class implements Command {
   public name = 'queue';
   public aliases = ['q'];
   public examples = [
-    ['queue', 'shows current queue'],
-    ['queue 2', 'shows second page of queue']
+    ['queue', 'Mostrar a fila atual'],
+    ['queue 2', 'Mostrar a segunda página da fila']
   ];
 
   private readonly playerManager: PlayerManager;
@@ -38,7 +38,7 @@ export default class implements Command {
       const maxQueuePage = Math.ceil((queueSize + 1) / PAGE_SIZE);
 
       if (queuePage > maxQueuePage) {
-        await msg.channel.send(errorMsg('the queue isn\'t that big'));
+        await msg.channel.send(errorMsg('📻 A fila não é tão grande'));
         return;
       }
 
@@ -53,11 +53,11 @@ export default class implements Command {
       description += ' ';
       description += `\`[${prettyTime(player.getPosition())}/${currentlyPlaying.isLive ? 'live' : prettyTime(currentlyPlaying.length)}]\``;
       description += ' 🔉';
-      description += player.isQueueEmpty() ? '' : '\n\n**Next up:**';
+      description += player.isQueueEmpty() ? '' : '\n\n**Próximo:**';
 
       embed.setDescription(description);
 
-      let footer = `Source: ${currentlyPlaying.artist}`;
+      let footer = `📻 Fonte: ${currentlyPlaying.artist}`;
 
       if (currentlyPlaying.playlist) {
         footer += ` (${currentlyPlaying.playlist.title})`;
@@ -72,11 +72,11 @@ export default class implements Command {
         embed.addField(`${(i + 1 + queuePageBegin).toString()}/${queueSize.toString()}`, song.title, false);
       });
 
-      embed.addField('Page', `${queuePage} out of ${maxQueuePage}`, false);
+      embed.addField('📻 Página', `${queuePage} de ${maxQueuePage}`, false);
 
       await msg.channel.send(embed);
     } else {
-      await msg.channel.send('queue empty');
+      await msg.channel.send('📻 Fila vazia');
     }
   }
 }

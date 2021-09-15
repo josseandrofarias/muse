@@ -11,9 +11,9 @@ export default async (guild: Guild): Promise<void> => {
 
   const owner = await guild.client.users.fetch(guild.ownerID);
 
-  let firstStep = '👋 Hi!\n';
-  firstStep += 'I just need to ask a few questions before you start listening to music.\n\n';
-  firstStep += 'First, what channel should I listen to for music commands?\n\n';
+  let firstStep = '👋 Olá!\n';
+  firstStep += 'Eu só preciso fazer algumas perguntas antes de você começar a ouvir música.\n\n';
+  firstStep += 'Primeiro, qual canal devo ouvir para comandos de música?\n\n';
 
   const firstStepMsg = await owner.send(firstStep);
 
@@ -64,8 +64,8 @@ export default async (guild: Guild): Promise<void> => {
   const chosenChannel = emojiChannels.find(e => e.emoji === choice.emoji.name) as EmojiChannel;
 
   // Second setup step (get prefix)
-  let secondStep = `👍 Cool, I'll listen to **#${chosenChannel.name}** \n\n`;
-  secondStep += 'Last question: what character should I use for a prefix? Type a single character and hit enter.';
+  let secondStep = `👍Legal, vou ouvir em **#${chosenChannel.name}** \n\n`;
+  secondStep += 'Última pergunta: qual caractere devo usar como prefixo? Digite um único caractere e pressione Enter.';
 
   await owner.send(secondStep);
 
@@ -79,7 +79,7 @@ export default async (guild: Guild): Promise<void> => {
   // Send welcome
   const boundChannel = guild.client.channels.cache.get(chosenChannel.id) as TextChannel;
 
-  await boundChannel.send(`hey <@${owner.id}> try \`${prefixCharacter}play https://www.youtube.com/watch?v=dQw4w9WgXcQ\``);
+  await boundChannel.send(`Hey <@${owner.id}> try \`${prefixCharacter}play https://www.youtube.com/watch?v=dQw4w9WgXcQ\``);
 
-  await firstStepMsg.channel.send(`Sounds good. Check out **#${chosenChannel.name}** to get started.`);
+  await firstStepMsg.channel.send(`Soa bem. Veririfique o canal **#${chosenChannel.name}** para começarmos.`);
 };

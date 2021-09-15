@@ -10,7 +10,7 @@ export default class implements Command {
   public name = 'unskip';
   public aliases = ['back'];
   public examples = [
-    ['unskip', 'goes back in the queue by one song']
+    ['unskip', 'Volta uma música na fila atual']
   ];
 
   public requiresVC = true;
@@ -27,9 +27,9 @@ export default class implements Command {
     try {
       await player.back();
 
-      await msg.channel.send('back \'er up\'');
+      await msg.channel.send('📻 Voltar para cima');
     } catch (_: unknown) {
-      await msg.channel.send(errorMsg('no song to go back to'));
+      await msg.channel.send(errorMsg('📻 Nenhuma música para voltar'));
     }
   }
 }
